@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #0D0D0D;
+    color: #F5F5F0;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1A1A16;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #4A4A42;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #C8FF00;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-ink-800 border border-ink-700 rounded-2xl p-5;
+  }
+
+  .card-hover {
+    @apply card transition-all duration-200 hover:border-ink-500 hover:-translate-y-0.5;
+  }
+
+  .btn-primary {
+    @apply bg-lime text-ink font-semibold px-5 py-2.5 rounded-xl transition-all duration-150 hover:bg-lime-200 active:scale-95 flex items-center gap-2;
+  }
+
+  .btn-ghost {
+    @apply text-ink-300 px-4 py-2 rounded-xl transition-all duration-150 hover:bg-ink-700 hover:text-ink-50 flex items-center gap-2;
+  }
+
+  .input-field {
+    @apply w-full bg-ink-700 border border-ink-600 text-ink-50 rounded-xl px-4 py-3 text-sm outline-none transition-all duration-150 placeholder:text-ink-400 focus:border-lime focus:ring-1 focus:ring-lime/30;
+  }
+
+  .label {
+    @apply text-xs font-medium text-ink-300 uppercase tracking-widest mb-2 block;
+  }
+
+  .tag-income {
+    @apply text-xs font-semibold px-2.5 py-1 rounded-full bg-lime/10 text-lime border border-lime/20;
+  }
+
+  .tag-expense {
+    @apply text-xs font-semibold px-2.5 py-1 rounded-full bg-coral/10 text-coral border border-coral/20;
+  }
+}
+
+.noise-bg {
+  position: relative;
+}
+.noise-bg::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-400 { animation-delay: 400ms; }
+
+.gradient-lime {
+  background: linear-gradient(135deg, #C8FF00 0%, #8AB700 100%);
+}
+
+.glow-lime {
+  box-shadow: 0 0 30px rgba(200, 255, 0, 0.15);
+}
