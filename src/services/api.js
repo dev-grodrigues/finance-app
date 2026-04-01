@@ -22,7 +22,7 @@ export async function fetchTransactions() {
     return data.map((row, index) => ({
       id: row.id || String(index + 1),
       descricao: row.descricao || '',
-      valor: parseFloat(row.valor) || 0,
+      valor: parseFloat(String(row.valor).replace(',', '.')) || 0,
       categoria: row.categoria || 'Outros',
       data: row.data || new Date().toISOString().split('T')[0],
       tipo: row.tipo || 'despesa',  // 'receita' | 'despesa'
@@ -39,7 +39,7 @@ export async function addTransaction(transaction) {
     const payload = {
       id: Date.now().toString(),
       descricao: transaction.descricao,
-      valor: String(transaction.valor),
+      valor: transaction.valor.tofixed(2),
       categoria: transaction.categoria,
       data: transaction.data,
       tipo: transaction.tipo,
