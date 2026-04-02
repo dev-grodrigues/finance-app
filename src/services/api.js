@@ -5,9 +5,11 @@
 //   VITE_SHEETS_API_URL  → URL base da sua sheet (ex: https://api.steinhq.com/v1/storages/SEU_ID)
 //   VITE_APP_USER        → login do usuário (ex: admin)
 //   VITE_APP_PASSWORD    → senha do usuário
+const BASE_URL = import.meta.env.VITE_SHEETS_API_URL
+
 
 // Retorna a sheet de transações
-const SHEET = `https://api.steinhq.com/v1/storages/69cd81c5affba40a626eccd3/Transacoes`
+const SHEET = `${BASE_URL}/Transacoes`
 
 // ── GET: busca todas as transações ──────────────────────────
 export async function fetchTransactions() {
