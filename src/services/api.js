@@ -9,7 +9,7 @@
 const BASE_URL = import.meta.env.VITE_SHEETS_API_URL
 
 // Retorna a sheet de transações
-const SHEET = `https://api.steinhq.com/v1/storages/69cd81c5affba40a626eccd3`
+const SHEET = `https://api.steinhq.com/v1/storages/69cd81c5affba40a626eccd3/Transacoes`
 
 // ── GET: busca todas as transações ──────────────────────────
 export async function fetchTransactions() {
