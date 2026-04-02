@@ -22,7 +22,7 @@ export function useFinance() {
 
   useEffect(() => {
     load()
-  }, [load])
+  }, [])
 
   const add = async (transaction) => {
     setSaving(true)

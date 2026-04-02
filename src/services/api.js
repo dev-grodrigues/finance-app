@@ -39,7 +39,7 @@ export async function addTransaction(transaction) {
     const payload = {
       id: Date.now().toString(),
       descricao: transaction.descricao,
-      valor: transaction.valor.tofixed(2),
+      valor: transaction.valor,
       categoria: transaction.categoria,
       data: transaction.data,
       tipo: transaction.tipo,
