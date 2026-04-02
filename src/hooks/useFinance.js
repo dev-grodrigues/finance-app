@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { fetchTransactions, addTransaction } from '../services/api'
 
 export function useFinance() {
@@ -7,7 +7,7 @@ export function useFinance() {
   const [error, setError] = useState(null)
   const [saving, setSaving] = useState(false)
 
-  const load = useCallback(async () => {
+  const load = async () => {
     setLoading(true)
     setError(null)
     try {
@@ -18,17 +18,17 @@ export function useFinance() {
     } finally {
       setLoading(false)
     }
-  }, [])
+  }
 
   useEffect(() => {
     load()
-  }, [])
+  }, []) // roda uma vez ao montar o componente
 
   const add = async (transaction) => {
     setSaving(true)
     try {
       const saved = await addTransaction(transaction)
-      setTransactions((prev) => [saved, ...prev])
+      await load() // recarrega tudo do Sheets após salvar
       return { success: true }
     } catch (err) {
       return { success: false, error: 'Erro ao salvar transação.' }
@@ -37,7 +37,6 @@ export function useFinance() {
     }
   }
 
-  // ── Cálculos derivados ──────────────────────────────────
   const totalReceitas = transactions
     .filter((t) => t.tipo === 'receita')
     .reduce((acc, t) => acc + t.valor, 0)
@@ -48,7 +47,6 @@ export function useFinance() {
 
   const saldo = totalReceitas - totalDespesas
 
-  // Gastos agrupados por categoria (para gráfico de pizza)
   const gastosPorCategoria = transactions
     .filter((t) => t.tipo === 'despesa')
     .reduce((acc, t) => {
@@ -61,7 +59,6 @@ export function useFinance() {
     value,
   }))
 
-  // Fluxo mensal (últimos 6 meses) para gráfico de barras
   const fluxoMensal = (() => {
     const months = {}
     const now = new Date()
